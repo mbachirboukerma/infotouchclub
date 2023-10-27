@@ -103,19 +103,27 @@
 
     <script>
         const scriptURL = 'https://script.google.com/macros/s/AKfycbwZyNpHk-aKH91n-J_zw3RFK3j2BPxsOFZKC40naZ27Zg9mtZKNrUmwhdNGtnVkl25Q/exec';
-        const form = document.getElementById('contactForm');
-        const cardContainer = document.querySelector('.card-container');
-        const outroOverlay = document.querySelector('.outro-overlay');
-        const spinner = document.getElementById('spinner');
-    
-        form.addEventListener('submit', e => {
+const scriptURL2 = 'https://script.google.com/macros/s/AKfycbx1J4YMhWDAehQsjBNJhicruBh5ieiDlVoeyAWpqcEgm8T2uJ46mSc0cxLnatxgJslDYw/exec';
+
+const form = document.getElementById('contactForm');
+const cardContainer = document.querySelector('.card-container');
+const outroOverlay = document.querySelector('.outro-overlay');
+const spinner = document.getElementById('spinner');
+
+form.addEventListener('submit', e => {
     e.preventDefault();
     spinner.classList.remove('disabled');
     form.querySelector('.submit-btn').classList.add('disabled'); // Assuming the button has an id of "submit-btn"
 
     const formData = new FormData(form);
 
-    fetch(scriptURL, { method: 'POST', body: formData })
+    // Get the selected team value
+    const selectedTeam = formData.get('team');
+
+    // Choose the appropriate URL based on the selected team
+    const targetScriptURL = selectedTeam === 'programming' ? scriptURL : scriptURL2;
+
+    fetch(targetScriptURL, { method: 'POST', body: formData })
         .then(response => response.json())
         .then(data => {
             console.log('Success!', data);
@@ -125,6 +133,7 @@
             outroOverlay.style.display = 'flex'; // Show the outro-overlay section
         });
 });
+
     </script>
     </body>
 </html>
