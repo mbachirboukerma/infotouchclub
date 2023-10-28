@@ -36,7 +36,7 @@
                     <input type="text" name="email" id="email" required <span>@g.ens-kouba.dz</span>
                     <div class="error"></div>
                 </div>
-        
+                        
                 <div class="input-container">
                     <label for="phone">Phone</label>
                     <input type="tel" name="phone" id="phone" required>
@@ -89,18 +89,20 @@
         <!-- thank you for signing up -->
     </main>
     <section class="outro-overlay disabled slideUp-animation">
-        <h1 class="company">iTOUCH</h1>
+        <h1 class="company">iTOUCH <img src="/Main page/images/logo.png" alt="logo"></h1>
         <h1 class="outro-greeting">Thank's for signing up..!</h1>
         <img src="./assets/images/shape.svg" alt="" class="shape">
         <dotlottie-player src="https://lottie.host/dfb3a86a-d3df-4a4d-91b2-ee3616a9b413/cGEzDFVPPe.json" background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay></dotlottie-player>
         <div class="author-link">
             &copy;&nbsp;
-            <a href="https://www.instagram.com/infotouchclub" target="_blank">Info Touch</a> |
-            <a href="https://www.instagram.com/yassine_boukerma" target="_blank">Yassine Boukerma</a>
+            <a href="https://www.instagram.com/infotouchclub">Info Touch</a> |
+            <a href="https://www.instagram.com/yassine_boukerma">Yassine Boukerma</a>
         </div>
     </section>
 
     <script>
+        
+
         const scriptURL = 'https://script.google.com/macros/s/AKfycbwZyNpHk-aKH91n-J_zw3RFK3j2BPxsOFZKC40naZ27Zg9mtZKNrUmwhdNGtnVkl25Q/exec';
 const scriptURL2 = 'https://script.google.com/macros/s/AKfycbx1J4YMhWDAehQsjBNJhicruBh5ieiDlVoeyAWpqcEgm8T2uJ46mSc0cxLnatxgJslDYw/exec';
 
@@ -115,6 +117,9 @@ form.addEventListener('submit', e => {
     form.querySelector('.submit-btn').classList.add('disabled'); // Assuming the button has an id of "submit-btn"
 
     const formData = new FormData(form);
+    //add gsuite domain
+    const username = formData.get('email');
+    formData.set('email', username + '@g.ens-kouba.dz');
 
     // Get the selected team value
     const selectedTeam = formData.get('team');
