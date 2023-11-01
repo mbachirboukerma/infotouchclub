@@ -112,8 +112,11 @@ form.addEventListener('submit', e => {
 
     const formData = new FormData(form);
     //add gsuite domain
-    const username = formData.get('email');
+        const username = formData.get('email');
+    if (!username.endsWith('@g.ens-kouba.dz')) {
     formData.set('email', username + '@g.ens-kouba.dz');
+}
+
 
     // Get the selected team value
     const selectedTeam = formData.get('team');
