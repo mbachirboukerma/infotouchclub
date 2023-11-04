@@ -1,34 +1,32 @@
-const submitBtn = document.querySelector('.submit-btn');
-const phone = document.querySelector('#phone');
-const email = document.querySelector('#mail');
-const errorDisplayers = document.getElementsByClassName('error');
-const inputFields = document.querySelectorAll('input');
+const dynamicText = document.querySelector("h3 span");
+const words = ["Patient", "Excited", "Anticipating", "Eager"];
 
-let count = 2;
+// Variables to track the position and deletion status of the word
+let wordIndex = 0;
+let charIndex = 0;
+let isDeleting = false;
 
-function onValidation(current, messageString, booleanTest) {
-    let message = current;
-    message.textContent = messageString;
-    booleanTest !== 0 ? ++count : count; // Use strict comparison (!==)
+const typeEffect = () => {
+    const currentWord = words[wordIndex];
+    const currentChar = currentWord.substring(0, charIndex);
+    dynamicText.textContent = currentChar;
+    dynamicText.classList.add("stop-blinking");
+
+    if (!isDeleting && charIndex < currentWord.length) {
+        // If condition is true, type the next character
+        charIndex++;
+        setTimeout(typeEffect, 200);
+    } else if (isDeleting && charIndex > 0) {
+        // If condition is true, remove the previous character
+        charIndex--;
+        setTimeout(typeEffect, 100);
+    } else {
+        // If word is deleted then switch to the next word
+        isDeleting = !isDeleting;
+        dynamicText.classList.remove("stop-blinking");
+        wordIndex = !isDeleting ? (wordIndex + 1) % words.length : wordIndex;
+        setTimeout(typeEffect, 1200);
+    }
 }
 
-for (let i = 0; i < inputFields.length; i++) {
-    let currentInputField = inputFields[i];
-    let currentErrorDisplayer = errorDisplayers[i];
-
-    currentInputField.addEventListener('keyup', (e) => {
-        let message = currentErrorDisplayer;
-        e.target.value !== "" ? onValidation(currentErrorDisplayer, '', 0) : onValidation(currentErrorDisplayer, '*This field is Required', 0);
-    });
-}
-
-phone.addEventListener('keyup', (e) => {
-    let message = errorDisplayers[1];
-    e.target.value === e.target.value.replace(/\D/g, '') ? onValidation(message, '', 1) : onValidation(message, '*Please enter a valid number', 0); // Use strict comparison (===)
-});
-
-email.addEventListener('keyup', (e) => {
-    let message = errorDisplayers[0];
-    mail.value.includes('@') && mail.value.includes('g.ens-kouba.dz') ? onValidation(message, '', 1) : onValidation(message, '*Please provide a valid Email', 0); // Use && for logical AND
-});
-
+typeEffect();
