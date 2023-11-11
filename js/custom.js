@@ -48,3 +48,16 @@
   $('.social-links a').tooltip();
 
 })(jQuery);
+
+
+
+// pop up js 
+// Wait for the document to be fully loaded
+document.addEventListener("DOMContentLoaded", function () {
+  // Set a timeout to show the modal after 2000 milliseconds (2 seconds)
+  setTimeout(function () {
+    // Select the modal element by its ID and trigger its display
+    var myModal = new bootstrap.Modal(document.getElementById('exampleModalCenter'));
+    myModal.show();
+  }, 4000); // 2000 milliseconds = 2 seconds
+});
