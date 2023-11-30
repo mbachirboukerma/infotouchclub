@@ -457,5 +457,9 @@ a {
         order: 1;
     }
 }
+.company a{
+    color: white !important;
+
+}
 
 
