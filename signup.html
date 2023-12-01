@@ -118,6 +118,7 @@ const spinner = document.getElementById('spinner');
 form.addEventListener('submit', e => {
     e.preventDefault();
     spinner.classList.remove('disabled');
+    submitBtn.classList.add('hide');
     form.querySelector('.submit-btn').classList.add('disabled'); // Assuming the button has an id of "submit-btn"
 
     const formData = new FormData(form);
